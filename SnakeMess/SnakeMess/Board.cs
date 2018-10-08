@@ -1,25 +1,14 @@
 ﻿
-
 namespace SnakeMess
 {
 	class Board
 	{
-		private int _width, _height;
-		public int Width
-		{
-			get
-			{
-				return _width;
-			}
-			set
-			{
-				_width = value;
-			}
-		}
+		public int Width { get; set; }
+		public int Height { get; set; }
 		public Board(int width = 1, int height = 1)
 		{
-			_width = width;
-			_height = height;
+			Width = width;
+			Height = height;
 		}
 
 	}
