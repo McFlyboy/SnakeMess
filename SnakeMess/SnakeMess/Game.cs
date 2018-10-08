@@ -41,6 +41,7 @@ namespace SnakeMess
 		private void Render()
 		{
 			//Code that displays the snake and the apple...
+            //Her bør vell både apple og snake ha sin egen render metode som blir kalt på?
 		}
 		private void Stop()
 		{

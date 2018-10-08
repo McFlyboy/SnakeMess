@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Apple.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="Snake.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameConsole.cs" />
     <Compile Include="Point.cs" />
