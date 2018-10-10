@@ -8,6 +8,9 @@ namespace SnakeMess
 		private bool shouldClose;
 
 		private GameConsole console;
+        private InputHandler inputHandler;
+
+        private int newDirection;
 		public Game()
 		{
 			running = false;
@@ -21,6 +24,7 @@ namespace SnakeMess
 			}
 			running = true;
 			console = GameConsole.Instance;
+            inputHandler = InputHandler.Instance;
 			console.Title = title;
 			//Startup-code here...
 			Run();
@@ -29,19 +33,52 @@ namespace SnakeMess
 		{
 			while (!shouldClose)
 			{
-				Update();
+                if (inputHandler.EscapeKey())
+                {
+                    shouldClose = true;
+                    break;
+                }
+                else if (inputHandler.UpKey())
+                {
+                    //newHead.Y -1
+                    newDirection = 1;
+                }
+                else if (inputHandler.DownKey())
+                {
+                    //newHead.Y +1
+                    newDirection = 2;
+                }
+                else if (inputHandler.LeftKey())
+                {
+                    //newHead.X -1
+                    newDirection = 3;
+                }
+                else if (inputHandler.RightKey())
+                {
+                    //newHead.X +1
+                    newDirection = 4;
+                }
+                else
+                {
+                    //Prompt user for action?
+                }
+
+                Update();
 				Render();
 			}
 			Stop();
 		}
 		private void Update()
 		{
-			//Code that updates the game...
+            //Code that updates the game...
+
+            //snake.Move(newDirection);
+            
 		}
 		private void Render()
 		{
 			//Code that displays the snake and the apple...
-            //Her bør vell både apple og snake ha sin egen render metode som blir kalt på?
+            
 		}
 		private void Stop()
 		{
