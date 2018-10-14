@@ -31,5 +31,10 @@ namespace SnakeMess
 		{
 			Console.ForegroundColor = ConsoleColor.Yellow;
 		}
+		public void Draw(char ch, Point point)
+		{
+			Console.SetCursorPosition(point.X, point.Y);
+			Console.Write(ch);
+		}
 	}
 }

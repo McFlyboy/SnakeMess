@@ -7,50 +7,74 @@ using System.Text;
 
 namespace SnakeMess
 {
-    
-    class Snake
-    {
-        //Kanskje ha en instance variabel? 
-    
-        public List<Point> body;
-        public Snake()
+
+	class Snake
+	{
+		public List<Point> Body { get; set; }
+		public Direction CurrentDirection { get; set; }
+		public char HeadAppearance { get; }
+		public char BodyAppearance { get; }
+		public Point Head { get { return Body[Body.Count - 1]; } }
+		public Snake()
         {
-            body = new List<Point>();
-            body.Add(new Point(10, 10));
-        }
-
-        public void Move(int direction)
+			Body = new List<Point>()
+			{
+				new Point(10, 10),
+				new Point(10, 10),
+				new Point(10, 10),
+				new Point(10, 10)
+			};
+			CurrentDirection = Direction.DOWN;
+			HeadAppearance = '@';
+			BodyAppearance = '0';
+		}
+		public bool IsNextHeadOverlappingBodypart()
+		{
+			Point nextHead = GetNextHead();
+			for (int i = 0; i < Body.Count - 1; i++)
+			{
+				if (Body[i].X == nextHead.X && Body[i].Y == nextHead.Y)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		public Point GetNextHead()
+		{
+			Point nextHead = new Point(Head);
+			switch (CurrentDirection)
+			{
+				case Direction.UP:
+					nextHead.Y--;
+					break;
+				case Direction.DOWN:
+					nextHead.Y++;
+					break;
+				case Direction.LEFT:
+					nextHead.X--;
+					break;
+				case Direction.RIGHT:
+					nextHead.X++;
+					break;
+			}
+			return nextHead;
+		}
+        public void Move(Point nextHead, bool keepTail)
         {
-            switch (direction)
-            {
-                case 1: //Move Up: newHead.Y -1;
-                    break;
-                case 2:
-                    //Move Down: newHead.Y +1
-                    break;
-                case 3:
-                    //Move Left: newHead.X -1
-                    break;
-                case 4:
-                    //Move Right: newHead.X +1
-                    break;
-                default:
-                    break;
-
-            }
+			GameConsole.Instance.SetSnakeDrawColor();
+			GameConsole.Instance.Draw(BodyAppearance, Head);
+			GameConsole.Instance.Draw(HeadAppearance, nextHead);
+			Body.Add(nextHead);
+			if (!keepTail)
+			{
+				GameConsole.Instance.Draw(' ', Body[0]);
+				Body.RemoveAt(0);
+			}
         }
-
-        
-        public void Grow()
-        {
-            
-            //body.Add(new Point(10, 10));
-        }
-
-        public void Render()
-        {
-
-        }
-
+		public enum Direction
+		{
+			UP, LEFT, DOWN, RIGHT
+		}
     }
 }

@@ -21,36 +21,20 @@ namespace SnakeMess
                 return _instance;
             }
         }
-
-        public void readKey()
-        {
-            input = Console.ReadKey(true);    
-        }
-
-        public bool RightKey()
-        {
-            return input.Key == ConsoleKey.RightArrow;
-        }
-
-        public bool LeftKey()
-        {
-            return input.Key == ConsoleKey.LeftArrow;
-        }
-
-        public bool UpKey()
-        {
-            return input.Key == ConsoleKey.UpArrow;
-        }
-
-        public bool DownKey()
-        {
-            return input.Key == ConsoleKey.DownArrow;
-        }
-
-
-        public bool EscapeKey()
-        {
-            return input.Key == ConsoleKey.Escape;
-        }
-    }
+		public bool Right { get { return input.Key == ConsoleKey.RightArrow; } }
+		public bool Left { get { return input.Key == ConsoleKey.LeftArrow; } }
+		public bool Up { get { return input.Key == ConsoleKey.UpArrow; } }
+		public bool Down { get { return input.Key == ConsoleKey.DownArrow; } }
+		public bool Space { get { return input.Key == ConsoleKey.Spacebar; } }
+		public bool Escape { get { return input.Key == ConsoleKey.Escape; } }
+		public bool HasNewKey()
+		{
+			bool available = Console.KeyAvailable;
+			if (available)
+			{
+				input = Console.ReadKey(true);
+			}
+			return available;
+		}
+	}
 }
