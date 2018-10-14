@@ -60,17 +60,16 @@ namespace SnakeMess
 			}
 			return nextHead;
 		}
-        public void Move(Point nextHead, bool keepTail)
+        public Point Move(Point nextHead, bool keepTail)
         {
-			GameConsole.Instance.SetSnakeDrawColor();
-			GameConsole.Instance.Draw(BodyAppearance, Head);
-			GameConsole.Instance.Draw(HeadAppearance, nextHead);
 			Body.Add(nextHead);
+			Point tail = null;
 			if (!keepTail)
 			{
-				GameConsole.Instance.Draw(' ', Body[0]);
+				tail = Body[0];
 				Body.RemoveAt(0);
 			}
+			return tail;
         }
 		public enum Direction
 		{

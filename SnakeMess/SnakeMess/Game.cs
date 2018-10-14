@@ -99,6 +99,9 @@ namespace SnakeMess
 				shouldClose = true;
 				return;
 			}
+			console.SetSnakeDrawColor();
+			console.Draw(snake.HeadAppearance, nextHead);
+			console.Draw(snake.BodyAppearance, snake.Head);
 			if (nextHead.X == apple.X && nextHead.Y == apple.Y)
 			{
 				snake.Move(nextHead, true);
@@ -106,7 +109,8 @@ namespace SnakeMess
 			}
 			else
 			{
-				snake.Move(nextHead, false);
+				Point tail = snake.Move(nextHead, false);
+				console.Draw(' ', tail);
 			}
 		}
 		private void Stop()
